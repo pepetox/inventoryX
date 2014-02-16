@@ -28,7 +28,7 @@ class ConceptsController < ApplicationController
   # POST /concepts.json
   def create
     @concept = Concept.new(concept_params)
-    @concept.user_id = current
+    
 
     respond_to do |format|
       if @concept.save
