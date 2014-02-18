@@ -7,7 +7,8 @@ class ConceptsController < ApplicationController
   # GET /concepts
   # GET /concepts.json
   def index
-    @concepts = Concept.all
+
+    @concepts = Concept.where(user: current_user)
   end
 
   # GET /concepts/1
@@ -28,7 +29,7 @@ class ConceptsController < ApplicationController
   # POST /concepts.json
   def create
     @concept = Concept.new(concept_params)
-    
+    @concept.user= current_user
 
     respond_to do |format|
       if @concept.save
@@ -73,6 +74,6 @@ class ConceptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concept_params
-      params.require(:concept).permit(:cantidad, :nombre, :signo, :uuid, :user_id)
+      params.require(:concept).permit(:cantidad, :nombre, :signo)
     end
 end
